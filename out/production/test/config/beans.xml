@@ -1,0 +1,12 @@
+<!--Spring 容器读取这个配置文件，解析出要创建的两个对象：rateLimiter 和 redisCounter，并且得到两者的依赖关系：rateLimiter 依赖 redisCounter-->
+
+<beans>
+    <bean id="rateLimiter" class="com.di.container.RateLimiter">
+        <constructor-arg ref="redisCounter"/>
+    </bean>
+
+    <bean id="redisCounter" class="com.di.container.RedisCounter" scope="singleton" lazy-init="false">
+        <constructor-arg type="String" value="127.0.0.1" />
+        <constructor-arg type="String" value="1234" />
+    </bean>
+</beans>
